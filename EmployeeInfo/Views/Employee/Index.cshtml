@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "Employee Info";
+}
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/AngularjsCode.js"></script>
+<style>
+    .btn-space {
+        margin-left: -5%;
+        background-color: cornflowerblue;
+        font-size: large;
+    }
+</style>
+<h2>Employee List</h2>
+<div ng-app="myApp">
+    <div ng-controller="myCtrl" ng-init="GetAllData()" class="divList">
+        
+        <table cellpadding="12" class="table table-bordered table-hover">
+            <tr>
+                <td>
+                    <b>Name</b>
+                </td>
+                <td>
+                    <b>Gender</b>
+                </td>
+                <td>
+                    <b>Department</b>
+                </td>
+                <td>
+                    <b>City</b>
+                </td>
+                <td>
+                    <b>Actions</b>
+                </td>
+            </tr>
+            <tr ng-repeat="Emp in EmployeeList">
+
+                <td>
+                    {{Emp.EmpName}}
+                </td>
+                <td>
+                    {{Emp.Gender}}
+                </td>
+                <td>
+                    {{Emp.DeptName}}
+                </td>
+                <td>
+                    {{Emp.CityName}}
+                </td>
+
+                <td>
+                    <input type="button" class="btn btn-warning" value="Update" ng-click="UpdateEmp(Emp)" />
+                    <input type="button" class="btn btn-danger" value="Delete" ng-click="DeleteEmp(Emp)" />
+                </td>
+            </tr>
+        </table>
+        <div class="form-horizontal" role="form">
+            <div class="container">
+                <div class="row">
+                    <h2>
+                        <span id="spn">Add New Employee</span>
+                    </h2>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Name:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="inputEmail" placeholder="Name" ng-model="Employee.EmpName">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+
+                            <select ng-model="ddlDept" id="ddlDept" class="form-control" name="Department" ng-options="dept.DeptName for dept in DepartmentList track by dept.DeptId" ng-change="Employee.DeptId = ddlDept.DeptId;">
+                                <option value="" label="Select Department"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+
+                            <select ng-model="ddlCity" id="ddlCity" class="form-control" name="City" ng-options="city.CityName for city in CityList track by city.CityId" ng-change="Employee.CityId = ddlCity.CityId;">
+                                <option value="" label="Select City"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Gender:</label>
+                            <div class="col-md-8">
+                                <input type="radio" value="Male" ng-model="Employee.Gender">Male
+                                <input type="radio" value="Felmale" ng-model="Employee.Gender">Felmale
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-lg-4">
+                        <input type="button" id="btnSave" class="form-control btn-space" value="Submit" ng-click="InsertData()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Hidden("EmpID_")
+
+</div>
+
+
